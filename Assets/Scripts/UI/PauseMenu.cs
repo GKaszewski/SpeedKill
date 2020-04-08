@@ -9,6 +9,7 @@ public class PauseMenu : MonoBehaviour {
     private bool isPaused = false;
 
     private void Start() {
+        Time.timeScale = 1.0f;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
     }
@@ -31,7 +32,7 @@ public class PauseMenu : MonoBehaviour {
         }
     }
 
-    public void Leave() {
-        SceneManager.LoadSceneAsync("Menu");
+    public void Leave() {  
+        SceneManager.LoadScene("Menu");
     }
 }
