@@ -65,6 +65,9 @@ public class PlayerController : MonoBehaviour
     /******************************* UPDATE ******************************/
     void Update()
     {
+        //Cursor state
+        //Cursor.lockState = CursorLockMode.Locked;
+
         //Updates
         UpdateInteraction();
         UpdateMovingStatus();

@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 9122968623272302113}
   - component: {fileID: 9122968623272302140}
   - component: {fileID: 9122968623272302141}
+  - component: {fileID: 7231617239483137779}
   m_Layer: 0
   m_Name: Bot
   m_TagString: Bot
@@ -95,7 +96,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 9122968623272302141}
-  isAlive: 0
+  targets: []
+  gunShotSound: {fileID: 8300000, guid: babb2e8b096793843a01c3596245c89b, type: 3}
+  dieSound: {fileID: 8300000, guid: 4ce8497889a013c40a9c59b11b4a04c7, type: 3}
   target: {fileID: 0}
   gun: {fileID: 989286372464081606}
   eyes: {fileID: 9122968623404529337}
@@ -156,6 +159,102 @@ NavMeshAgent:
   m_BaseOffset: 0.39
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!82 &7231617239483137779
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9122968623272302119}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &9122968623404529336
 GameObject:
   m_ObjectHideFlags: 0
@@ -224,11 +323,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 9122968624395292454}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 7cdb7a4b4e760074f86bffffc84c9358,
-        type: 3}
-      propertyPath: m_Name
-      value: badass ticktac
-      objectReference: {fileID: 0}
     - target: {fileID: -6874540395504895234, guid: 7cdb7a4b4e760074f86bffffc84c9358,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -289,6 +383,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 7cdb7a4b4e760074f86bffffc84c9358,
+        type: 3}
+      propertyPath: m_Name
+      value: badass ticktac
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7cdb7a4b4e760074f86bffffc84c9358, type: 3}
 --- !u!4 &4315010766029472837 stripped
@@ -304,11 +403,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 9122968623272302112}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 8530cb85deb4bf4438942fa2132e1d4e,
-        type: 3}
-      propertyPath: m_Name
-      value: double barreled shoutgun
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 8530cb85deb4bf4438942fa2132e1d4e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -363,6 +457,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 8530cb85deb4bf4438942fa2132e1d4e,
+        type: 3}
+      propertyPath: m_Name
+      value: double barreled shoutgun
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8530cb85deb4bf4438942fa2132e1d4e, type: 3}

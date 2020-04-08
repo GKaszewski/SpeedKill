@@ -7,12 +7,15 @@ using System.Linq;
 
 public class BotAI : MonoBehaviour {
     private Target self;
+    private AudioSource src;
     [SerializeField]
     private NavMeshAgent agent;
     private bool canShoot = true;
     [SerializeField]
     private List<Target> targets = new List<Target>();
 
+    public AudioClip gunShotSound;
+    public AudioClip dieSound;
     public Transform target;
     public GameObject gun;
     public Transform eyes;
@@ -22,6 +25,7 @@ public class BotAI : MonoBehaviour {
     public float reloadTime = 1.3f;
 
     private void Start() {
+        src = GetComponent<AudioSource>();
         self = GetComponent<Target>();
         agent = GetComponent<NavMeshAgent>();
     }
@@ -78,6 +82,7 @@ public class BotAI : MonoBehaviour {
             muzzleflash.SetActive(true);
         }
         LeanTween.rotateAroundLocal(gun, Vector3.right, 360f, reloadTime - 0.15f).setEase(LeanTweenType.easeSpring);
+        src.PlayOneShot(gunShotSound);
         StartCoroutine(Reload());
         if(Physics.Raycast(ray, out hit, 100f, targetLayers)) {
             if (hit.collider != null) {
@@ -111,6 +116,7 @@ public class BotAI : MonoBehaviour {
     }
 
     public void Kill() {
+        AudioSource.PlayClipAtPoint(dieSound, transform.position, 150.0f);
         Destroy(gameObject);
         GameManager.instance.botSpawner.StartCoroutine("Respawn");
     }

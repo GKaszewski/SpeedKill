@@ -1,30 +1,43 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using EZCameraShake;
 public class CombatSystem : MonoBehaviour {
+    private AudioSource src;
+
     public Gun gun;
+    public GrenadeLauncher grenadeLauncher;
     public Transform camT;
     public GameObject cameraForShake;
     public LayerMask targetLayers;
     public float shakeAmount;
+    public Weapon currentWeapon;
+    public AudioClip gunShot;
+
     private void Start() {
-        GameManager.instance.eventsManager.OnGunShoot += Shoot;
+        src = GetComponent<AudioSource>();
     }
 
-    private void OnEnable() {
-        GameManager.instance.eventsManager.OnGunShoot -= Shoot;
-    }
-
-    private void OnDisable() {
-        GameManager.instance.eventsManager.OnGunShoot += Shoot;
-    }
-
-    private void Update() {
-        if (Input.GetMouseButton(0) && !gun.isReloading) {
-            //GameManager.instance.eventsManager.ShootGun();
-            Shoot();
+    private void FixedUpdate() {
+        switch (currentWeapon) {
+            case Weapon.Shotgun:
+                gun.gameObject.SetActive(true);
+                grenadeLauncher.gameObject.SetActive(false);
+                if (Input.GetMouseButton(0) && !gun.isReloading) {
+                    Shoot();
+                }
+                break;
+            case Weapon.GrenadeLauncher:
+                gun.gameObject.SetActive(false);
+                grenadeLauncher.gameObject.SetActive(true);
+                if (Input.GetMouseButton(0) && !grenadeLauncher.isReloading)
+                    grenadeLauncher.Shoot();
+                break;
+            default:
+                break;
         }
+
+       
 
         Debug.DrawRay(camT.position, camT.forward * 100f, Color.cyan);
     }
@@ -32,8 +45,9 @@ public class CombatSystem : MonoBehaviour {
     private void Shoot() {
         var ray = new Ray(gameObject.transform.position, camT.forward);
         RaycastHit hit;
-        LeanTween.rotateLocal(cameraForShake, Vector3.one * shakeAmount, 0.1f).setEaseShake();
+        //CameraShaker.Instance.ShakeOnce(shakeAmount, 10f, 0.1f,1f);
         gun.Shoot();
+        src.PlayOneShot(gunShot);
         if(Physics.Raycast(ray, out hit, 100f, targetLayers)) {
             if (hit.collider != null) {
                 Debug.Log("Hit: " + hit.collider.name);

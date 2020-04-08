@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour {
     public float respawnTime = 5f;
     private void OnEnable() {
         if (instance == null) instance = this;
+        var settings = FindObjectOfType<BotSettings>();
+        if (settings != null) botSpawner.bots = settings.bots;
         //eventsManager.OnBotSpawn += AddTargets;
     }
 }

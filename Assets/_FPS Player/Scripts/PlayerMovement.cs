@@ -25,7 +25,9 @@ public class PlayerMovement : MonoBehaviour
 
     public bool grounded = false;
     public Vector3 jump = Vector3.zero;
+    public AudioClip jumpSound;
 
+    private AudioSource src;
     private RaycastHit hit;
     private Vector3 force;
     private bool forceGravity;
@@ -33,6 +35,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
+        src = GetComponent<AudioSource>();
         // Saving component references to improve performance.
         controller = GetComponent<CharacterController>();
     }
@@ -102,6 +105,7 @@ public class PlayerMovement : MonoBehaviour
     public void Jump(Vector3 dir, float mult)
     {
         jump = dir * mult;
+        src.PlayOneShot(jumpSound);
     }
 
     public void UpdateJump()
