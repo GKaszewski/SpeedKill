@@ -14,6 +14,10 @@ public class PlayerListingsMenu : MonoBehaviourPunCallbacks {
         GetCurrentRoomPlayers();
     }
 
+    private void Update() {
+         
+    }
+
     private void GetCurrentRoomPlayers() {
         foreach (var player in PhotonNetwork.CurrentRoom.Players.Values) {
             AddPlayerToTheListing(player);

@@ -43,6 +43,6 @@ public class MenuUIController : MonoBehaviour {
     }
 
     public void PlayGame() {
-        SceneManager.LoadSceneAsync("SampleScene");
+        SceneManager.LoadSceneAsync("SinglePlayer Level");
     }
 }

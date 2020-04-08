@@ -10,6 +10,7 @@ public class RoomListingMenu : MonoBehaviourPunCallbacks {
 
     public List<RoomListing> rooms = new List<RoomListing>();
 
+
     public override void OnRoomListUpdate(List<RoomInfo> roomList) {
         foreach (var info in roomList) {
             if (info.RemovedFromList) {

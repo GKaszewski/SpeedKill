@@ -40,7 +40,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks {
 
     private void StartGame() {
         //SetNickname();
-        if (PhotonNetwork.CurrentRoom.PlayerCount == 1) PhotonNetwork.LoadLevel(1);
+        if (PhotonNetwork.CurrentRoom.PlayerCount == 1) PhotonNetwork.LoadLevel("MultiplayerLevel");
     }
 
     public void CreateRoom() {
